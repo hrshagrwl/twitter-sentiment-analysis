@@ -42,7 +42,7 @@ if __name__ == '__main__':
     stream = TweeterStreamProducer()
     i=0
     for data in f:
-        stream.on_status(data.strip())
+        stream.on_status(data.strip().encode('utf-8'))
         i+=1
         if i % 10000 == 0:
             print ("Pushed ", i, " messages")
