@@ -64,7 +64,6 @@ def stream(ssc, pwords, nwords, duration):
     # Each element of tweets will be the text of a tweet.
     # You need to find the count of all the positive and negative words in these tweets.
     # Keep track of a running total counts and print this at every time step (use the pprint function).
-    # YOUR CODE HERE
     runningCount = tweets.flatMap(lambda line: line.split(" ")) \
                   .map(lambda word: getPolarity(word)) \
                   .reduceByKey(lambda a, b: a+b)
