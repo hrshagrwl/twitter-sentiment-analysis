@@ -1,19 +1,16 @@
 # Basic Twitter Sentiment Analytics using Apache Spark
 
-# Streaming APIs and Python
+## Streaming APIs and Python
 
-In this project, you will be processing streaming data in real time. One of the first requirements is to get
+In this project, we will be processing streaming data in real time. One of the first requirements is to get
 access to the streaming data; in this case, tweets. We will be simulating real-time streaming of tweets
 so that we have a consistent dataset.
 
-In addition, you will also be using Kafka to buffer the tweets before processing. Kafka provides a
+In addition, we will also be using Kafka to buffer the tweets before processing. Kafka provides a
 distributed queuing service which can be used to store the data when the data creation rate is more
-than processing rate. It also has several other uses. Read about the basics of Kafka (Introduction up to QuickStart) from the official documentation.
+than processing rate.
 
-Finally, as an introduction to stream processing API provided by Spark, read the programming guide
-from the beginning up to, and including, the section on discretized streams (DStreams). Pay special attention to the “quick example” as it will be fairly similar to this project.
-
-## Initialization
+## How to Run
 
 Download and extract the twitter data zip file:
 
@@ -36,7 +33,7 @@ Create a topic named twitterstream in kafka:
 
 `$KAFKA_HOME/bin/kafka-topics.sh --create --zookeeper localhost: 2181 --replication-factor 1 --partitions 1 --topic twitterstream`
 
-### Check what topics you have with:
+### Check what topics we have with:
 
 `$KAFKA_HOME/bin/kafka-topics.sh --list --zookeeper localhost: 2181`
 
