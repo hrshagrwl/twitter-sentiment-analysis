@@ -39,7 +39,10 @@ def make_plot(counts):
 
     plt.plot( 'x', 'positive', data=words, marker='', color='green', linewidth=2)
     plt.plot( 'x', 'negative', data=words, marker='', color='red', linewidth=2)
+    plt.xlabel("Timestep")
+    plt.ylabel("Count")
     # plt.plot( 'x', 'neutral', data=words, marker='', color='grey', linewidth=2)
+    plt.savefig('plot.png')
     plt.show()
 
 def load_wordlist(filename):
@@ -47,6 +50,11 @@ def load_wordlist(filename):
     This function should return a list or set of words from the given filename.
     """
     return set(line.strip() for line in open(filename))
+
+def update_function(newValues, runningCount):
+    if runningCount is None:
+        runningCount = 0
+    return sum(newValues, runningCount)
 
 def stream(ssc, pwords, nwords, duration):
     kstream = KafkaUtils.createDirectStream(
@@ -68,6 +76,9 @@ def stream(ssc, pwords, nwords, duration):
                   .map(lambda word: getPolarity(word)) \
                   .reduceByKey(lambda a, b: a+b)
     
+    totalCount = runningCount.updateStateByKey(update_function)
+    totalCount.pprint()
+
     # Let the counts variable hold the word counts for all time steps
     # You will need to use the foreachRDD function.
     # For our implementation, counts looked like:
